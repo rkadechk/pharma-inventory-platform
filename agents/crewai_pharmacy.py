@@ -28,7 +28,7 @@ SYNTHETIC_DATA_DIR = os.path.join(
 
 # Initialize LLM (uses OPENAI_API_KEY environment variable)
 llm = ChatOpenAI(
-    model_name="gpt-5.1", 
+    model_name="gpt-4o", 
     temperature=0.7,
     model_kwargs={"stop": None}
 )
