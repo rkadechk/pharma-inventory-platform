@@ -1,0 +1,88 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+eggs/
+.eggs/
+*.egg-info/
+.egg
+MANIFEST
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
+.venv-1/
+.venv-2/
+.venv-3/
+pharma_venv/
+~/
+~/test_venv/
+test_venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Secrets
+.env
+.env.local
+
+# Data & logs
+data/
+logs/
+*.log
+*.csv
+*.parquet
+*.db
+
+# Generated output files
+*.html
+data_analysis_graphs.html
+g_expiry_risk_dashboard.html
+g1_risk_value.html
+g2_dept_category.html
+g3_weekly_pattern.html
+g4_forecast_performance.html
+g5_pareto.html
+g6_optimization_impact.html
+graph1_risk_level.html
+graph2_facility.html
+graph2_value_at_risk.html
+graph3_category.html
+graph3_department.html
+graph4_department.html
+graph4_weekly_pattern.html
+graph5_forecast_performance.html
+graph5_weekly.html
+graph6_pareto.html
+graph6_top10.html
+
+# Test & coverage artifacts
+.pytest_cache/
+.benchmarks/
+.coverage
+coverage.xml
+htmlcov/
+test_reports/
+test_results.log
+validation_output.txt
+
+# Empty placeholder folders
+output/
+ml/
+etl/
+infra/
+dashboards/
+config/
+models/
+
+# OS
+Thumbs.db
