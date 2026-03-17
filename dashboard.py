@@ -1820,10 +1820,10 @@ def page_transfer():
         fcol1, fcol2, fcol3 = st.columns(3)
         with fcol1:
             window_map = {
-                "📅 Last 7 Days": 7,
-                "📅 Last 30 Days": 30,
-                "📆 Last 90 Days": 90,
-                "📆 Last 180 Days": 180,
+                "📅 Next 7 Days": 7,
+                "📅 Next 30 Days": 30,
+                "📆 Next 90 Days": 90,
+                "📆 Next 180 Days": 180,
                 "🗓️ All Time": -1,
                 "🗓️ Custom Range": -2,
             }
