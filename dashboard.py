@@ -1507,7 +1507,7 @@ def page_home():
         """, unsafe_allow_html=True)
         if st.button("View Expiration Risk Dashboard", key="btn_expiration", use_container_width=True):
             st.session_state.page = "expiration"
-            st.experimental_rerun()
+            st.rerun()
     
     with col2:
         st.markdown("""
@@ -1519,7 +1519,7 @@ def page_home():
         """, unsafe_allow_html=True)
         if st.button("View Transfer Dashboard", key="btn_transfer", use_container_width=True):
             st.session_state.page = "transfer"
-            st.experimental_rerun()
+            st.rerun()
     
     col3, col4 = st.columns([2, 1])
     
@@ -1533,7 +1533,7 @@ def page_home():
         """, unsafe_allow_html=True)
         if st.button("View Demand Forecast Dashboard", key="btn_demand", use_container_width=True):
             st.session_state.page = "demand"
-            st.experimental_rerun()
+            st.rerun()
     
     st.markdown("---")
     st.info("💡 **Tip:** Use the sidebar to navigate between dashboards or click any dashboard card above to get started.")
@@ -1988,7 +1988,7 @@ def page_transfer():
         st.markdown("<div style='height:28px'></div>", unsafe_allow_html=True)
         if st.button("✖ Clear Route", key="route_clear", use_container_width=True):
             st.session_state["route_clear_pending"] = True
-            st.experimental_rerun()
+            st.rerun()
 
     # Build route-filtered dataframe for cost breakdown / table
     route_active = sel_from != "All Facilities" or sel_to != "All Facilities"
@@ -2114,7 +2114,7 @@ def page_transfer():
         with pcol1:
             if st.button("◀ Prev", disabled=(page == 0), key="trans_page_prev"):
                 st.session_state['trans_proposals_page'] -= 1
-                st.experimental_rerun()
+                st.rerun()
         with pcol2:
             note = f"Showing {start_rec}–{end_rec} of {total_records} transfers  (page {page+1} of {total_pages})"
             if zero_qty_count:
@@ -2123,7 +2123,7 @@ def page_transfer():
         with pcol3:
             if st.button("Next ▶", disabled=(page >= total_pages - 1), key="trans_page_next"):
                 st.session_state['trans_proposals_page'] += 1
-                st.experimental_rerun()
+                st.rerun()
     else:
         st.info("No transfers found for this route / filter combination")
     
@@ -2530,22 +2530,22 @@ def main():
         
         if st.button("🏠 HOME", use_container_width=True, key="nav_home"):
             st.session_state.page = 'home'
-            st.experimental_rerun()
+            st.rerun()
         
         st.markdown("---")
         st.markdown("**DASHBOARDS**")
         
         if st.button("📈 Expiration Risk", use_container_width=True, key="nav_exp"):
             st.session_state.page = 'expiration'
-            st.experimental_rerun()
+            st.rerun()
         
         if st.button("💰 Transfer Coordination", use_container_width=True, key="nav_trans"):
             st.session_state.page = 'transfer'
-            st.experimental_rerun()
+            st.rerun()
         
         if st.button("🔮 Demand Forecast", use_container_width=True, key="nav_dem"):
             st.session_state.page = 'demand'
-            st.experimental_rerun()
+            st.rerun()
         
         st.markdown("---")
         # Get actual facility names from session (set by API on first load)
