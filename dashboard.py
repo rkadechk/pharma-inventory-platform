@@ -1916,7 +1916,7 @@ def page_transfer():
     total_cost        = df["total_transfer_cost"].sum()    if "total_transfer_cost"    in df.columns else 0
     pending_units     = (df.loc[df["status"] == "PENDING", "quantity"].sum()
                          if ("status" in df.columns and "quantity" in df.columns) else 0)
-    avg_efficiency    = (df["cost_benefit_score"].mean() * 100
+    avg_efficiency    = (df["cost_benefit_score"].mean()
                          if "cost_benefit_score" in df.columns and df["cost_benefit_score"].notna().any()
                          else None)
     completed_count   = int(df[df["status"] == "COMPLETED"].shape[0]) if "status" in df.columns else 0
@@ -1926,10 +1926,10 @@ def page_transfer():
     roi = (potential_savings / total_cost * 100) if total_cost > 0 else 0
     savings_trend = f"ROI {roi:.0f}%  ({completed_count}/{total_count} completed)"
 
-    # KPI 3: avg efficiency score or pending units label
+    # KPI 3: cost-benefit ratio or pending units label
     if avg_efficiency is not None:
-        kpi3_val   = f"{avg_efficiency:.0f}%"
-        kpi3_label = "AVG EFFICIENCY SCORE"
+        kpi3_val   = f"{avg_efficiency:.2f}×"
+        kpi3_label = "COST-BENEFIT RATIO"
         kpi3_trend = f"{completed_count} transfers completed"
     else:
         kpi3_val   = f"{pending_units:,} units"
@@ -1938,7 +1938,7 @@ def page_transfer():
 
     render_metric_card(col1, f"${potential_savings:,.0f}", "POTENTIAL SAVINGS", "")
     render_metric_card(col2, f"${total_cost:,.0f}", "TOTAL TRANSFER COST", "", is_warning=True)
-    render_metric_card(col3, kpi3_val, kpi3_label, "", is_critical=(avg_efficiency is not None and avg_efficiency < 50))
+    render_metric_card(col3, kpi3_val, kpi3_label, "", is_critical=(avg_efficiency is not None and avg_efficiency < 1.0))
 
     st.markdown("---")
 
