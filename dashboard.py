@@ -1936,9 +1936,9 @@ def page_transfer():
         kpi3_label = "UNITS PENDING TRANSFER"
         kpi3_trend = f"{completed_count} transfers completed"
 
-    render_metric_card(col1, f"${potential_savings:,.0f}", "POTENTIAL SAVINGS", savings_trend)
-    render_metric_card(col2, f"${total_cost:,.0f}", "TOTAL TRANSFER COST", f"{total_count} transfers in window", is_warning=True)
-    render_metric_card(col3, kpi3_val, kpi3_label, kpi3_trend, is_critical=(avg_efficiency is not None and avg_efficiency < 50))
+    render_metric_card(col1, f"${potential_savings:,.0f}", "POTENTIAL SAVINGS", "")
+    render_metric_card(col2, f"${total_cost:,.0f}", "TOTAL TRANSFER COST", "", is_warning=True)
+    render_metric_card(col3, kpi3_val, kpi3_label, "", is_critical=(avg_efficiency is not None and avg_efficiency < 50))
 
     st.markdown("---")
 
