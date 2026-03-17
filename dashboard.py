@@ -1820,10 +1820,10 @@ def page_transfer():
         fcol1, fcol2, fcol3 = st.columns(3)
         with fcol1:
             window_map = {
-                "📅 Next 7 Days": 7,
-                "📅 Next 30 Days": 30,
-                "📆 Next 90 Days": 90,
-                "📆 Next 180 Days": 180,
+                "📅 Last 7 Days": 7,
+                "📅 Last 30 Days": 30,
+                "📆 Last 90 Days": 90,
+                "📆 Last 180 Days": 180,
                 "🗓️ All Time": -1,
                 "🗓️ Custom Range": -2,
             }
@@ -1838,7 +1838,7 @@ def page_transfer():
             if window_days == -2:
                 trans_custom = st.date_input(
                     "Custom Date Range",
-                    value=(datetime.now().date(), (datetime.now() + timedelta(days=30)).date()),
+                    value=((datetime.now() - timedelta(days=30)).date(), datetime.now().date()),
                     key="trans_custom_range"
                 )
             else:
@@ -1870,16 +1870,15 @@ def page_transfer():
     # Apply transfer filters — use expected_delivery_date (has 177 unique days)
     date_cols = ["expected_delivery_date", "created_date", "updated_at"]
     if window_days > 0:
-        # Show records with delivery date in the NEXT window_days from today
-        now = pd.Timestamp(datetime.now()).normalize()
-        cutoff_end = now + timedelta(days=window_days)
+        # Floor to midnight so records on the boundary day are included
+        cutoff = pd.Timestamp(datetime.now() - timedelta(days=window_days)).normalize()
         for col in date_cols:
             if col in df.columns:
                 ts = pd.to_datetime(df[col], errors="coerce")
                 if ts.notna().any():
                     if ts.dt.tz is not None:
                         ts = ts.dt.tz_localize(None)
-                    df = df[ts.isna() | ((ts >= now) & (ts <= cutoff_end))]
+                    df = df[ts.isna() | (ts >= cutoff)]
                     break
     elif window_days == -2 and trans_custom:
         dates_list = list(trans_custom) if hasattr(trans_custom, "__iter__") and not isinstance(trans_custom, date) else [trans_custom]
